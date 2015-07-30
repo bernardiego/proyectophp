@@ -39,7 +39,24 @@ class Request {
         require $controllerFileName;
         $controller = new $controllerClassName();
 
-        call_user_func_array([$controller, $actionMethodName], $params);
+        $response = call_user_func_array([$controller, $actionMethodName], $params);
+        $this->executeResponse($response);
+    }
+
+    /*
+     * Function that show the view (or anything)
+     * returned by an ActionMethod.
+     */
+    public function executeResponse($response) {
+        if ($response instanceof Response) {
+            $response->execute();
+        } elseif (is_string($response)) {
+            echo $response;
+        } elseif (is_array($response)) {
+            echo json_encode($response);
+        } else {
+            exit('Respuesta inválida');
+        }
     }
 
     /*
