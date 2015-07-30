@@ -1,5 +1,9 @@
 <?php
 
+    function add($var, $value){
+        $this->args[$var] = $value;
+    }
+
     function controller ($name) {
         if (empty($name)) {
             $name = "home";
@@ -18,4 +22,14 @@
     function view($template, $vars = array()) {
         extract($vars);
         require "views/$template.tpl.php";
+    }
+
+    // Get the GET url.
+    function url() {
+        if (empty($_GET['url'])) {
+            $url = "";
+        } else {
+            $url = $_GET['url'];
+        }
+        return $url;
     }

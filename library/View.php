@@ -16,7 +16,16 @@
 
             call_user_func(function() use ($template, $vars) {
                 extract($vars);
-                require "views/$template.tpl.php";
+
+                /*
+                 * Store in a variable the content of the template/strings
+                 * contained between ob_start() and ab_get_clean().
+                 */
+                ob_start();
+                view($template);
+                $tpl_content = ob_get_clean();
+
+                view('layout', ['tpl_content' => $tpl_content]);
             });
         }
 

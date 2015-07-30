@@ -7,7 +7,7 @@
         }
 
         public function indexAction() {
-
+            return new View('contacto', ['titulo' => 'Mejorando.la']);
         }
 
     }
