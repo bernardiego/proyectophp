@@ -1,5 +1,5 @@
 <?php
 
-    class Response {
-
+    abstract class Response {
+        abstract public function execute();
     }
